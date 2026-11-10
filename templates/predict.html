@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predict Crop — Farmer Guider AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>🌾 Farmer Guider AI</h2>
+    <div class="nav-links">
+        <a href="/">Home</a>
+    </div>
+</div>
+
+<div class="hero">
+    <h2>🌾 Enter Farming Details</h2>
+
+    {% if error %}
+    <p style="color:#ff6b6b; font-weight:bold;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <input type="number" step="any" name="n" placeholder="Nitrogen (e.g. 90)" required>
+        <input type="number" step="any" name="p" placeholder="Phosphorus (e.g. 42)" required>
+        <input type="number" step="any" name="k" placeholder="Potassium (e.g. 43)" required>
+        <input type="number" step="any" name="temperature" placeholder="Temperature °C (e.g. 21)" required>
+        <input type="number" step="any" name="humidity" placeholder="Humidity % (e.g. 82)" required>
+        <input type="number" step="any" name="ph" placeholder="pH (e.g. 6.5)" required>
+        <input type="number" step="any" name="rainfall" placeholder="Rainfall mm (e.g. 203)" required>
+
+        <button type="submit" class="btn">Predict</button>
+    </form>
+    <p>💡 Sample values (good for rice): N 90, P 42, K 43, Temp 21, Humidity 82, pH 6.5, Rainfall 203</p>
+
+</div>
+
+</body>
+</html>

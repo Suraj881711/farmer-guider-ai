@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result — Farmer Guider AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h2>🌾 Best Crop Suggestion</h2>
+
+    <h1>{{ result.crop }}</h1>
+
+    {% if result.confidence is not none %}
+    <p>🤖 Model confidence: <b>{{ result.confidence }}%</b></p>
+    {% endif %}
+
+    {% if result.top3 and result.top3|length > 1 %}
+    <p>Other close options:
+        {% for item in result.top3[1:] %}
+            {{ item.crop }} ({{ item.confidence }}%){% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    {% endif %}
+
+    <p>✅ Based on your soil nutrients, weather conditions, and rainfall.</p>
+
+    <h3>📋 Your inputs</h3>
+    <p>
+        Nitrogen: {{ inputs.n }} | Phosphorus: {{ inputs.p }} | Potassium: {{ inputs.k }}<br>
+        Temperature: {{ inputs.temperature }} °C | Humidity: {{ inputs.humidity }}%<br>
+        pH: {{ inputs.ph }} | Rainfall: {{ inputs.rainfall }} mm
+    </p>
+
+    <a href="/predict">🔁 Try Again</a>
+    <br><br>
+    <a href="/">🏠 Home</a>
+</div>
+</body>
+</html>
